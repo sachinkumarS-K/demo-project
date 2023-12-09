@@ -27,19 +27,19 @@ function UpdatePassword() {
       }}
       className="w-full h-screen flex items-center justify-center"
     >
-      <div className="w-[90%] lg:w-[35%] lg:h-[30rem] h-[25rem] rounded-lg shadow-lg bg-red-100">
-        <h1 className="w-full text-center mt-[2rem] py-6 text-white text-2xl font-bold tracking-wide">
+      <div className="w-[90%] lg:w-[35%] lg:h-[30rem] h-[26rem] rounded-lg shadow-lg bg-red-100">
+        <h1 className="w-full text-center mt-[2rem] py-6 text-black text-2xl font-bold tracking-wide">
           Update Password
         </h1>
 
         <form
           method="POST"
           onSubmit={submitHandler}
-          className=" mt-[4rem] lg:mt-[5rem] flex flex-col gap-6 items-center justify-center"
+          className=" mt-[2.5rem] lg:mt-[5rem] flex flex-col gap-6 items-center justify-center"
         >
           <input
             type="text"
-            className="py-3 w-[90%] lg:w-[60%] mx-auto rounded-lg indent-7 outline-0 text-xl  "
+            className="py-3 w-[90%] 00 border border-solid lg:w-[60%] mx-auto rounded-lg indent-7 outline-0 text-xl  "
             value={password}
             placeholder="Enter your new Password"
             onChange={(e) => setPassword(e.target.value)}
