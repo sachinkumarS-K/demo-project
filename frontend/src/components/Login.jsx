@@ -44,6 +44,9 @@ function Login() {
         console.log(error.response)
          if (error.response.status == 403) {
            toast.error("Invalid creditials");
+        }
+         if (error.response.status == 400) {
+           toast.error("Incorrect Password");
          }
       }
        
@@ -63,7 +66,7 @@ function Login() {
           <p className="w-full text-center">
             Or use your email for registration
           </p>
-          <form onSubmit={submitHandler} className="w-full h-[11rem] pb-5">
+          <form onSubmit={submitHandler} className="w-full h-[12rem] pb-5">
             <div className="flex w-10/12 mx-auto items-center justify-between flex-col h-full mt-5">
               <input
                 className=" bg-[#eee] h-10 w-full lg:w-[65%] placeholder:py-7 rounded-md  indent-6 placeholder:text-slate-400 "
@@ -84,7 +87,9 @@ function Login() {
                 onChange={onChangeHandler}
                 value={formData.password}
               />
-
+              <NavLink className="ml-16" to="/forgot-password">
+                <p className="pl-10">Forgot your password ? </p>
+              </NavLink>
               <button className="px-12 text-[17px] bg-[#ff4b2b] py-2 rounded-3xl text-white mt-3  ">
                 Submit
               </button>

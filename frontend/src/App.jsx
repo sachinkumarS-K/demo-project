@@ -7,33 +7,21 @@ import Login from './components/Login';
 import { UserContext } from './Context/userContext';
 import axios from 'axios';
 import Dashboard from './pages/Dashboard';
+import ForgotPassword from './pages/ForgotPassword';
+import UpdatePassword from './pages/UpdatePassword';
 
 function App() {
   const { user, setUser, isLoggedIn, setIsLoggedIn, todo, setTodo } =
     useContext(UserContext);
-  // async function fetchData(id) {
-  //   const res = await axios.get(`/api/v1/getUser/${id}`);
-  //   console.log(res);
-  //   setUser(res.data.user);
-  //   setTodo(res.data.user.todos)
-  //   setIsLoggedIn(true)
-  // }
-
-  // useEffect(() => {
-  //     console.log(localStorage.getItem("user"))
-  //   if (localStorage.getItem("user")) {
-  //     fetchData(localStorage.getItem("user"));
-  //   }
-  // } , [])
   return (
     <>
       <Routes>
-      
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route path="/signUp" element={<Form />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route path="/signUp" element={<Form />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/update-password/:token" element={<UpdatePassword />} />
       </Routes>
       <Toaster />
     </>
