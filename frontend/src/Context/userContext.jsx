@@ -8,25 +8,25 @@ export default function UserContextProvider({ children }) {
       firstName: "",
       lastName: "",
       email: "",
+      image : ""
     });
-  const [loader , setLoader] = useState(false)
-  // if (localStorage.getItem("user")) {
-  //    setIsLoggedIn(true)
-  // }
+  const [loader, setLoader] = useState(false)
+   const [isOpen, setOpen] = useState(false);
+ 
    const [todo, setTodo] = useState(null);
-     function setCookie(value) {
-       localStorage.setItem("user", value);
-     }
+     
     const value = {
       isLoggedIn,
       setIsLoggedIn,
       user,
       setUser,
-      setCookie,
+     
       todo,
       setTodo,
       loader,
       setLoader,
+      isOpen,
+      setOpen,
     };
 
 

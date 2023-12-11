@@ -1,13 +1,16 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FiAlertCircle } from "react-icons/fi";
 import { IoIosMail } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 import { NavLink } from 'react-router-dom';
 import toast from "react-hot-toast";
+import Navbar from './Navbar';
+import { UserContext } from '../Context/userContext';
 
 
 function ForgotPassword() {
+  const {setOpen} = useContext(UserContext)
   const [email, setEmail] = useState("");
   async function submitHandler(e) {
     e.preventDefault();
@@ -29,8 +32,12 @@ function ForgotPassword() {
        }
     }
   }
+  useEffect(() => {
+    setOpen(false);
+  },[])
   return (
-    <div className="w-full h-screen bg-gray-200 absolute">
+    <div className="w-full min-h-screen relative bg-gray-200 ">
+      <Navbar/>
       <div className="w-full h-[40vh] bg-blue-500 relative z-0"></div>
       <div className="w-full h-[60vh] flex items-center justify-center ">
         <div className="lg:w-[40%] w-[89%] lg:h-[29rem] h-[27rem] bg-white -translate-y-[8rem] rounded-lg shadow-lg">

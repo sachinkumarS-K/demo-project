@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Loader from "../components/loader/Loader"
 function Dashboard() {
+
    const navigate = useNavigate();
   const {
     user,
@@ -15,21 +16,26 @@ function Dashboard() {
     setTodo,
     loader,
     setLoader,
+    isOpen,
+    setOpen,  
   } = useContext(UserContext);
+
   async function fetchData() {
     try {
       setLoader(true);
       const res = await axios.get(`/api/v1/getUser/`);
-
-      
-      // if (res.response.status === 401) {
-      //   navigate("/login")
-      // }
-      console.log(res);
-      setUser(res.data.user);
+    //  console.log(res.data.user.email);
+     setUser((pre) => ({
+       ...pre,
+       firstName: res.data.user.firstName,
+       lastName: res.data.user.lastName,
+       email: res.data.user.email,
+       image: res.data.user.image,
+     }));
+      //console.log(res.data.user.email);
       setTodo(res.data.user.todos);
       setIsLoggedIn(true);
-      console.log("home");
+     
       setLoader(false);
     } catch (error) {
       console.log(error.response)
@@ -38,25 +44,28 @@ function Dashboard() {
       }
     }
   }
+  
   useEffect(() => {
+    //console.log(user)
+    setOpen(false);
     fetchData();
   }, []);
   return (
-    <div>
-      {/* {loader ? ({</Loader/>}) : ({<Navbar/>})} */}
-      {
-        loader ? (
-          <div> 
-            <Loader/>
+    <div className="relative w-full h-screen bg-gray-300">
+
+      {loader ? (
+        <div>
+          <Loader />
         </div>
-        ) : (
-            <div>
-               <Navbar/>
-          </div>
-        )
-      }
+      ) : (
+        <div>
+            <Navbar page={"dashboard"} />
+           
+        </div>
+      )}
+     
     </div>
-  )
+  );
 }
 
 export default Dashboard

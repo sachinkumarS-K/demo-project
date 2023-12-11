@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios"
 import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
@@ -6,14 +6,20 @@ import { useNavigate } from "react-router-dom";
 import { FaFacebookF } from "react-icons/fa";
 import { FaGooglePlusG } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa";
+import { IoEye } from "react-icons/io5";
+import { IoEyeOff } from "react-icons/io5";
+import Navbar from "../pages/Navbar";
+import { UserContext } from "../Context/userContext";
 
 function Form() {
+  const { setOpen } = useContext(UserContext);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
   });
+  const [active, setActive] = useState(false);
   const navigate = useNavigate();
   async function submitHandler(event) {
     event.preventDefault();
@@ -30,10 +36,16 @@ function Form() {
            password : ""
          };
        });
-      toast.success("Signed up successfully");
+      
       setTimeout(() => {
-        navigate("/login")
-      }, 1500);
+               toast.success("User Signed Up Successfully")
+               window.scrollTo({
+                 top: 0,
+                 left: 0,
+                 behavior: "smooth",
+               });
+               navigate("/login");
+             }, 1000);
     } catch (error) {
       console.log(error)
       toast.error(`${error.response.data.message}`)
@@ -48,12 +60,18 @@ function Form() {
       };
     });
   }
+  useEffect(() => {
+    setOpen(false);
+  } , [])
   return (
-    <div className=" flex items-center justify-center w-full h-screen">
+    <div className=" relative flex items-center flex-col lg:gap-10 w-full min:h-screen">
+      <Navbar />
       <div className=" mb-[5rem] w-[100%] lg:w-[70%] mx-auto overflow-hidden h-full lg:h-[30rem] gap-4 justify-center  flex flex-col-reverse lg:flex-row shadow-xl ">
         <div className="lg:w-[40%] w-full h-full rounded-l-[20px] bg-[#ff4b2b] overflow-hidden ">
-          <div className="w-[80%] mx-auto h-full flex flex-col justify-center items-center gap-5 text-white ">
-            <h1 className="text-4xl font-extrabold">Welcome Back</h1>
+          <div className="w-[80%] mx-auto h-full pb-5 flex flex-col justify-center items-center gap-5 text-white ">
+            <h1 className="text-4xl py-5 lg:py-0 font-extrabold">
+              Welcome Back
+            </h1>
             <p className="text-center">
               To keep connected with us please login with your personal info
             </p>
@@ -107,15 +125,28 @@ function Form() {
                 value={formData.email}
               />
 
-              <input
-                className=" bg-[#eee] h-10 w-full lg:w-[65%]  placeholder:py-7 rounded-md  indent-6 placeholder:text-slate-400 "
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
-                onChange={onChangeHandler}
-                value={formData.password}
-              />
+              <div className="relative w-full  -z-10 flex justify-center items-center ">
+                <input
+                  className=" bg-[#eee] h-10 w-full lg:w-[65%]  placeholder:py-7 rounded-md  indent-6 placeholder:text-slate-400 "
+                  type={active ? "text" : "password"}
+                  name="password"
+                  id="password"
+                  placeholder="Password"
+                  onChange={onChangeHandler}
+                  value={formData.password}
+                />
+                {active ? (
+                  <IoEye
+                    className="absolute text-[1.6rem] right-6 lg:right-[7.3rem]"
+                    onClick={() => setActive(!active)}
+                  />
+                ) : (
+                  <IoEyeOff
+                    className="absolute text-[1.6rem] right-6 lg:right-[7.3rem]"
+                    onClick={() => setActive(!active)}
+                  />
+                )}
+              </div>
 
               <button className="px-12 text-[17px] bg-[#ff4b2b] py-2 rounded-3xl text-white mt-3  ">
                 Submit

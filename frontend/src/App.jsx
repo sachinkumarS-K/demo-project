@@ -9,6 +9,8 @@ import axios from 'axios';
 import Dashboard from './pages/Dashboard';
 import ForgotPassword from './pages/ForgotPassword';
 import UpdatePassword from './pages/UpdatePassword';
+import About from './pages/About';
+import ErrorPage from './pages/ErrorPage';
 
 function App() {
   const { user, setUser, isLoggedIn, setIsLoggedIn, todo, setTodo } =
@@ -22,6 +24,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/update-password/:token" element={<UpdatePassword />} />
+        <Route path='about' element={<About />} />
+        <Route path='*' element= {<ErrorPage/>} />
       </Routes>
       <Toaster />
     </>
