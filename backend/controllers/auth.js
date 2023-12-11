@@ -5,7 +5,7 @@ require("dotenv").config();
 
 exports.signUp = async (req, res) => {
   try {
-      console.log("object")
+  
     const { firstName, lastName, email, password } = req.body;
     console.log(req.body)
         if (!firstName || !lastName || !email || !password) {
@@ -54,7 +54,7 @@ exports.login = async (req, res) => {
           });
         }
       const user = await User.findOne({ email }).populate("todos");
-      console.log(user)
+     // console.log(user)
         if (!user) {
               return res.status(403).json({
                 success: false,
@@ -100,7 +100,7 @@ exports.login = async (req, res) => {
 exports.getUser = async (req, res) => {
   try {
     const id = req.user.id;
-    console.log(id)
+    //console.log(id)
     const user = await User.findById(id).populate("todos")
     res.status(200).json({
       success: true,
