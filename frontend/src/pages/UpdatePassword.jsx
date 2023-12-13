@@ -1,12 +1,12 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 function UpdatePassword() {
     const [password, setPassword] = useState("");
     const [cPassword, setCpassword] = useState("");
     const {token} = useParams();
-
+const navigate = useNavigate()
     async function submitHandler(e) {
         e.preventDefault();
     try {
@@ -14,7 +14,9 @@ function UpdatePassword() {
        
         
         const res = await axios.post("/api/v1/resetPassword", { password, cPassword, token });
-        console.log(res)
+      console.log(res);
+      navigate("/login")
+
     } catch (error) {
         console.log(error)
     }

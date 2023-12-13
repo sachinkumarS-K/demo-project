@@ -118,11 +118,17 @@ exports.getUser = async (req, res) => {
 
 exports.about = async (req, res) => {
   try {
+    const { id , token } = req.body;
+    const user = await User.findOneAndUpdate({_id:id}, { $set: { token: "" } }, { new: true });
     return res.json({
-      dataaa : req.user
+      dataaa : user
     })
   } catch (error) {
-    
+    console.log(error);
+    res
+      .status(500)
+      .json({ success: false, message: "User Cannot be deleted successfully" });
+  
   }
 }
 

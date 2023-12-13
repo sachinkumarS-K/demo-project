@@ -12,7 +12,7 @@ import Navbar from '../pages/Navbar';
 
 function Login() {
     const navigate = useNavigate();
-      const { isLoggedIn, setIsLoggedIn, setUser, setOpen } =
+      const { isOpen, setIsLoggedIn, setUser, setOpen } =
         useContext(UserContext);
     const [formData, setFormData] = useState({
         email: "",
@@ -103,7 +103,12 @@ function Login() {
                 value={formData.email}
               />
 
-              <div className="relative w-full flex justify-center items-center ">
+              <div
+                className={
+                  "relative w-full flex justify-center items-center " +
+                  (isOpen ? "-z-20" : "z-0")
+                }
+              >
                 <input
                   className=" bg-[#eee] h-10 w-full lg:w-[65%] md:w-[50%] relative  placeholder:py-7 rounded-md  indent-6 placeholder:text-slate-400 "
                   type={active ? "text" : "password"}

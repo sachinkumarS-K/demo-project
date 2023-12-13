@@ -8,12 +8,12 @@ import { Expo } from 'gsap';
 function Navbar({page}) {
   const { isLoggedIn, user, setUser, setIsLoggedIn , isOpen, setOpen } =
     useContext(UserContext);
-  
+    
   const burgerRef = useRef(null)
   const textRef = useRef(null)
   const navigate = useNavigate(); 
  
-
+console.log(page)
   useEffect(() => {
     //console.log(burgerRef)
     const t = gsap.timeline();
@@ -64,7 +64,12 @@ function Navbar({page}) {
   return (
     <div className="w-full bg-[#141313] text-white sticky top-0  ">
       <div className="lg:w-11/12 w-full flex items-center justify-between py-5 px-3 lg:px-10 mx-auto">
-        <h1 ref={textRef} className=" text-[2rem] shadow-lg pl-4 font-bold leading-5 tracking-wide">Sachin</h1>
+        <h1
+          ref={textRef}
+          className=" text-[2rem] shadow-lg pl-4 font-bold leading-5 tracking-wide"
+        >
+          Sachin
+        </h1>
 
         <div className="lg:flex md:flex hidden items-center justify-between space-x-7 gap-3 ">
           <div className=" hidden lg:flex space-x-8">
@@ -99,7 +104,7 @@ function Navbar({page}) {
           ) : (
             <div className="flex space-x-2">
               <button
-                className="border-0 px-4 py-2 bg-green-400 rounded-2xl text-[1rem]"
+                className="border-0 px-4 py-2 bg-green-400 rounded-2xl text-[1rem] "
                 onClick={() => {
                   console.log("object");
                 }}
@@ -139,15 +144,20 @@ function Navbar({page}) {
       </div>
       {isOpen && (
         <div
-          className="lg:hidden md:hidden transition-all duration-200 delay-300 absolute  w-full flex items-center justify-center text-black shadow-lg  pt-[5rem] 
+          className="lg:hidden md:hidden transition-all duration-200 delay-300 absolute  z-10 w-full flex items-center justify-center text-black shadow-lg  pt-[5rem] 
           "
         >
-          <div className="absolute top-[0rem] blur-xl w-full  z-20  h-[29rem] lg:rounded-2xl backdrop-blur-lg bg-gradient-to-r from-neutral-100  to [rgba(255,255,255,0.5)]  "></div>
-          <ul className="flex flex-col items-center gap-5 z-30">
+          <div
+            className=
+              "absolute top-[0rem] blur-xl w-full  z-20  h-[29rem] lg:rounded-2xl backdrop-blur-lg bg-gradient-to-r from-neutral-100  to [rgba(255,255,255,0.5)]  "
+            
+          ></div>
+          <ul className="flex flex-col items-center gap-5 z-30 "  
+            >
             <li className="text-3xl font-bold tracking-wide   drop-shadow-xl ">
               <NavLink to="/">Home</NavLink>
             </li>
-            <li className="text-3xl font-bold tracking-wide drop-shadow-xl"  >
+            <li className="text-3xl font-bold tracking-wide drop-shadow-xl">
               <NavLink to="/about"> About </NavLink>
             </li>
             <li className="text-3xl font-bold tracking-wide drop-shadow-xl">

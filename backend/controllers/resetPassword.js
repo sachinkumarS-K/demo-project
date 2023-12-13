@@ -1,7 +1,8 @@
 const crypto = require("crypto");
 const User = require("../models/userModel")
 const mailSender = require("../utils/mailSender");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
+const { resetPassword } = require("../mail/resetPassword");
 exports.resetPasswordToken = async (req, res) => {
     console.log("object")
     try {
@@ -32,13 +33,14 @@ exports.resetPasswordToken = async (req, res) => {
        console.log("DETAILS", updatedDetails);
 
          const url = `http://localhost:5173/update-password/${token}`;
+         //const url = `http://192.168.181.219:5173/update-password/${token}`;
 
           await mailSender(
             email,
             "Password Reset",
-            `Your Link for email verification is ${url}. Please click this url to reset your password.`
+            resetPassword(user.firstName , user.email , url)
           );
-
+          
          res.json({
            success: true,
            message:
@@ -84,8 +86,15 @@ exports.resetPassword = async (req, res) => {
     await User.findOneAndUpdate(
       { token: token },
       { password: hashedPassword },
+     
       { new: true }
     );
+ await User.findOneAndUpdate(
+   { token: token },
+  
+   { $set: { token: "" } },
+  
+ );
   return  res.json({
       success: true,
       message: `Password Reset Successful`,

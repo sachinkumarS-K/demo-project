@@ -17,30 +17,30 @@ function Home() {
     setTodo,
     setIsLoggedIn,
   } = useContext(UserContext);
-  async function fetchData() {
-    try {
-      setLoader(true);
-      //console.log(isLoggedIn)
+  // async function fetchData() {
+  //   try {
+  //     setLoader(true);
+  //     //console.log(isLoggedIn)
 
-      const res = await axios.get(`/api/v1/getUser/`);
-      console.log(res);
-      setUser(res.data.user);
-      setTodo(res.data.user.todos);
-      setIsLoggedIn(true);
+  //     const res = await axios.get(`/api/v1/getUser/`);
+  //     console.log(res);
+  //     setUser(res.data.user);
+  //     setTodo(res.data.user.todos);
+  //     setIsLoggedIn(true);
 
-      setLoader(false);
-    } catch (error) {
-      //console.log(error);
-      setLoader(false);
-      // if (error.response.status === 401) {
-      //   navigate("/login");
-      // }
-    }
-  }
+  //     setLoader(false);
+  //   } catch (error) {
+  //     //console.log(error);
+  //     setLoader(false);
+  //     // if (error.response.status === 401) {
+  //     //   navigate("/login");
+  //     // }
+  //   }
+  // }
   const homeRef = useRef(null);
 
   useEffect(() => {
-    fetchData();
+   // fetchData();
     window.scrollTo({
       top: 0,
       left: 0,

@@ -7,8 +7,8 @@ const mailSender = async(email, title, body) => {
           port: 465,
           secure: true,
           auth: {
-            user: "sachinraj.s.r.123456@gmail.com",
-            pass: "zuvy kyut hfgh dhzy",
+            user: process.env.MAIL_USER,
+            pass: process.env.MAIL_PASSWORD,
           },
         });
         let info = await transporter.sendMail({

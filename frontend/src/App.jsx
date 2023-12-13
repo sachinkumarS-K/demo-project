@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Form from "./components/Form"
 import {Toaster} from "react-hot-toast"
@@ -13,8 +13,51 @@ import About from './pages/About';
 import ErrorPage from './pages/ErrorPage';
 
 function App() {
-  const { user, setUser, isLoggedIn, setIsLoggedIn, todo, setTodo } =
-    useContext(UserContext);
+ const navigate = useNavigate()
+  //console.log("sachin");
+  const {
+
+    setUser,
+  
+    setIsLoggedIn,
+ 
+    setTodo,
+   
+    setLoader,
+  
+    setOpen,
+  } = useContext(UserContext);
+
+  async function fetchData() {
+    try {
+      setLoader(true);
+      const res = await axios.get(`/api/v1/getUser/`);
+      //  console.log(res.data.user.email);
+      setUser((pre) => ({
+        ...pre,
+        firstName: res.data.user.firstName,
+        lastName: res.data.user.lastName,
+        email: res.data.user.email,
+        image: res.data.user.image,
+      }));
+      //console.log(res.data.user.email);
+      setTodo(res.data.user.todos);
+      setIsLoggedIn(true);
+
+      setLoader(false);
+    } catch (error) {
+      console.log(error.response);
+      if (error.response.status === 401) {
+        navigate("/login");
+      }
+    }
+  }
+
+  useEffect(() => {
+    //console.log(user)
+    setOpen(false);
+    fetchData();
+  }, []);
   return (
     <>
       <Routes>
