@@ -12,10 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
-  cors({
-    origin: "https://todoapp-production-8090.up.railway.app",
-    credentials: true,
-  })
+  cors()
 );
 app.use("/api/v1/", userRoute);
 app.use("/api/v1/", todoRoute);

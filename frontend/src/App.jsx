@@ -56,7 +56,7 @@ function App() {
   useEffect(() => {
     //console.log(user)
     setOpen(false);
-    fetchData();
+    //fetchData();
   }, []);
   return (
     <>
