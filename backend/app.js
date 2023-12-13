@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "hppts://locahost:4000",
+    origin: "https://todoapp-production-8090.up.railway.app/",
     credentials: true,
   })
 );

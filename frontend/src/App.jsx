@@ -27,11 +27,11 @@ function App() {
   
     setOpen,
   } = useContext(UserContext);
-
+  ; const BASE_URL = "https://todoapp-production-8090.up.railway.app/"
   async function fetchData() {
     try {
       setLoader(true);
-      const res = await axios.get(`/api/v1/getUser/`);
+      const res = await axios.get(`${BASE_URL}/api/v1/getUser/`);
       //  console.log(res.data.user.email);
       setUser((pre) => ({
         ...pre,
