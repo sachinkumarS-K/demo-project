@@ -27,7 +27,7 @@ function App() {
   
     setOpen,
   } = useContext(UserContext);
-  ; const BASE_URL = "https://todoapp-production-8090.up.railway.app/"
+  const BASE_URL = "https://todoapp-production-8090.up.railway.app"
   async function fetchData() {
     try {
       setLoader(true);
