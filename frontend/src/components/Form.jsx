@@ -12,7 +12,7 @@ import Navbar from "../pages/Navbar";
 import { UserContext } from "../Context/userContext";
 
 function Form() {
-  const { setOpen , isOpen } = useContext(UserContext);
+  const { setOpen, isOpen, isLoggedIn } = useContext(UserContext);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -21,6 +21,7 @@ function Form() {
   });
   const [active, setActive] = useState(false);
   const navigate = useNavigate();
+  console.log(isOpen);
   async function submitHandler(event) {
     event.preventDefault();
     console.log(formData);
@@ -125,9 +126,9 @@ function Form() {
                 value={formData.email}
               />
 
-              <div className={" relative w-full z-auto  flex justify-center items-center "  + (isOpen ? "-z-20" : "z-0")}>
+              <div className={" relative w-full   flex justify-center items-center "+ (isOpen ? "-z-20" : "z-0")}  >
                 <input
-                  className=" bg-[#eee]  h-10 w-full z-0 lg:w-[65%]  placeholder:py-7 rounded-md  indent-6 placeholder:text-slate-400 "
+                  className=" bg-[#eee]  h-10 w-full  lg:w-[65%]  placeholder:py-7 rounded-md  indent-6 placeholder:text-slate-400 "
                   type={active ? "text" : "password"}
                   name="password"
                   id="password"

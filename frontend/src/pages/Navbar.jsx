@@ -13,7 +13,7 @@ function Navbar({page}) {
   const textRef = useRef(null)
   const navigate = useNavigate(); 
  
-console.log(page)
+  //console.log(page)
   useEffect(() => {
     //console.log(burgerRef)
     const t = gsap.timeline();
